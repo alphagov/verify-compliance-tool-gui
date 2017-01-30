@@ -1,6 +1,6 @@
 class AboutYourServiceController < ActionController::Base
   NEXT_ROUTE_BY_SERVICE_TYPE = {
-    rp: '/about-your-service/rp/0',
+    rp: '/about-your-service/rp/id',
     ms: '/about-your-service/ms/0',
     idp: '/about-your-service/idp/0',
   }
