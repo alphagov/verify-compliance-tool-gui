@@ -1,24 +1,13 @@
-# README
+GOV.UK Verify Compliance Tool GUI
+=================================
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repository contains the user interface for the GOV.UK Verify Compliance Tool.
 
-Things you may want to cover:
+The compliance tool helps relying parties and identity providers check that their code integrates with Verify correctly.
+By having a nice user interface we hope to make this process easier.
 
-* Ruby version
+Status
+------
 
-* System dependencies
+This is a new service – your [feedback](https://github.com/alphagov/verify-compliance-tool-gui/issues/new) will help us to improve it.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
