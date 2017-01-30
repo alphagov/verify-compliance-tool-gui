@@ -1,0 +1,21 @@
+<h1 class=heading-medium>About your service</h1>
+<p>What type of service would you like to test?</p>
+<form class="form-group" action="<%= about_your_service_path %>" method="post">
+    <fieldset>
+        <legend class="visually-hidden">What type of service would you like to test?</legend>
+        <label class="block-label selection-button-radio">
+            <input type="radio" name="what-are-you-testing" id="rp">
+            Relying Party
+        </label>
+        <label class="block-label selection-button-radio">
+            <input type="radio" name="what-are-you-testing" id="ms">
+            Matching Service
+        </label>
+        <label class="block-label selection-button-radio">
+            <input type="radio" name="what-are-you-testing" id="idp">
+            Identity Provider
+        </label>
+    </fieldset>
+    <br>
+    <input class="button" type="submit" value="Next">
+</form>
