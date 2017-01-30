@@ -1,4 +1,4 @@
-class AboutYourServiceMsController < ActionController::Base
+class AboutYourServiceMsController < ApplicationController
   def about_your_service_ms_0
     render 'about_your_service/ms/0', :layout => 'application'
   end

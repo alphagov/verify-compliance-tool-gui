@@ -1,4 +1,4 @@
-class AboutYourServiceIdpController < ActionController::Base
+class AboutYourServiceIdpController < ApplicationController
   def about_your_service_idp_0
     render 'about_your_service/idp/0', :layout => 'application'
   end

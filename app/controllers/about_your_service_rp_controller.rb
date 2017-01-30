@@ -1,4 +1,4 @@
-class AboutYourServiceRpController < ActionController::Base
+class AboutYourServiceRpController < ApplicationController
   def about_your_service_rp_id
     render 'about_your_service/rp/id', :layout => 'application'
   end
