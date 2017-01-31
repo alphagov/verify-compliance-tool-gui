@@ -1,0 +1,31 @@
+<% content_for(:page_title, 'Relying Party Certificates') %>
+<h1 class="heading-medium">Your Certificates</h1>
+<details>
+  <summary>Why do I need to provide these?</summary>
+  <div class="panel panel-border-narrow">
+    <p>
+      When making requests to Verify you need to sign your SAML messages. Similarly Verify will sign
+      responses that it sends to you. On top of this, assertions containing identity data will be encrypted
+      for your service, so that only you can read them.
+    </p>
+    <p>
+      So that we don't have to trust your certificates in our infrastructure for you to test with the
+      compliance tool we allow you to tell us which certificates you'll be using when you initialise your
+      test run.
+    </p>
+  </div>
+</details>
+<form id="new-compliance-test-form" action="<% about_your_service_rp_certificates_path %>" method="post">
+  <div class="form-group">
+    <label class="form-label" for="signing-cert">Signing Certificate</label>
+    <span class="form-hint">Base64 encoded X509 signing certificate for your service</span>
+    <textarea class="form-control" name="signing-cert" id="signing-cert"></textarea>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="encryption-cert">Encryption Certificate</label>
+    <span class="form-hint">Base64 encoded X509 encryption certificate for your service</span>
+    <textarea class="form-control" name="encryption-cert" id="encryption-cert"></textarea>
+  </div>
+  <input class="button" type="submit" value="Next" data-target-route="#/compliance-tests">
+  <%= token_tag %>
+</form>

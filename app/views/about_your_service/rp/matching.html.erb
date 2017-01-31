@@ -1,0 +1,33 @@
+<% content_for(:page_title, 'Relying Party Matching Service') %>
+<h1 class="heading-medium">Stubbing your Matching Service</h1>
+<details>
+  <summary>Why do I need to provide these?</summary>
+  <div class="panel panel-border-narrow">
+    <p>
+      When Verify sends a Response to your service it's already been through the so-called "Matching Process".
+      As part of this process a bit of SAML is signed by your Matching Service.
+    </p>
+    <p>
+      So that it's possible for us to test your service in isolation from your Matching Service you need
+      to tell us a few things about it so we can  stub it's behaviour in the compliance tool.
+    </p>
+  </div>
+</details>
+<form id="new-compliance-test-form" action="<%= about_your_service_rp_matching_path %>" method="post">
+  <div class="form-group">
+    <label class="form-label" for="expected-pid">Expected persistent identifier</label>
+    <span class="form-hint">The user ID returned by your matching service</span>
+    <input class="form-control" type="text" name="expected-pid" id="expected-pid">
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="ms-entity-id">Matching Service Entity ID</label>
+    <input class="form-control" type="text" name="ms-entity-id" id="ms-entity-id">
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="ms-private-key">Matching Service Private Key</label>
+    <span class="form-hint">Base64 encoded private signing key for the Matching Service Adapter</span>
+    <textarea class="form-control" type="text" name="ms-private-key" id="ms-private-key"></textarea>
+  </div>
+  <input class="button" type="submit" value="Next">
+  <%= token_tag %>
+</form>
