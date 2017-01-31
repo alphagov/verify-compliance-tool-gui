@@ -38,8 +38,8 @@ class AboutYourServiceRpController < ApplicationController
     encryption_cert = params.fetch('encryption-cert')
 
     session['rp_signing_cert'] = signing_cert
-    session['rp_signing_cert'] = encryption_cert
+    session['rp_encryption_cert'] = encryption_cert
 
-    render text: 'TODO: the rest of the app'
+    redirect_to '/confirm/rp'
   end
 end

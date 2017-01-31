@@ -16,4 +16,7 @@ Rails.application.routes.draw do
 
   get '/about-your-service/ms/0' => 'about_your_service_ms#about_your_service_ms_0'
   post '/about-your-service/ms/0' => 'about_your_service_ms#about_your_service_ms_0_post'
+
+  get '/confirm/rp' => 'confirm#confirm_rp'
+  post '/confirm/rp' => 'confirm#confirm_rp_post'
 end
