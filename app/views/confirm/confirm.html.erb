@@ -8,13 +8,13 @@
 <pre class="language-json">
 <code>
 {
-  "rpEntityId": "<%= h session.fetch('rp_entity_id') %>",
-  "assertionConsumerServiceUrl": "<%= h session.fetch('rp_service_url') %>",
-  "signingPublicCert":"<%= h session.fetch('rp_signing_cert') %>",
-  "encryptionPublicCert":"<%= h session.fetch('rp_encryption_cert') %>",
-  "expectedPID":"<%= h session.fetch('rp_expected_pid') %>",
-  "matchingServiceEntityId":"<%= h session.fetch('rp_matching_service_entity_id') %>",
-  "matchingServiceSigningPrivateCert":"<%= h session.fetch('rp_matching_service_private_key') %>"
+  "rpEntityId": "<%= h cookies.fetch('rp_entity_id') %>",
+  "assertionConsumerServiceUrl": "<%= h cookies.fetch('rp_service_url') %>",
+  "signingPublicCert":"<%= h cookies.fetch('rp_signing_cert') %>",
+  "encryptionPublicCert":"<%= h cookies.fetch('rp_encryption_cert') %>",
+  "expectedPID":"<%= h cookies.fetch('rp_expected_pid') %>",
+  "matchingServiceEntityId":"<%= h cookies.fetch('rp_matching_service_entity_id') %>",
+  "matchingServiceSigningPrivateCert":"<%= h cookies.fetch('rp_matching_service_private_key') %>"
 }
 </code>
 </pre>
