@@ -24,11 +24,10 @@ class ConfirmController < ApplicationController
     compliance_tool_response = Net::HTTP.start(compliance_tool_url.hostname, compliance_tool_url.port, use_ssl: compliance_tool_url.scheme == 'https') { |http| http.request(compliance_tool_request) }
 
     if compliance_tool_response.code == '200'
-      # Todo: explain this better.
-      # Todo: make this a proper page.
-      render text: 'Success! Your compliance tool test is now ready to start. Configure your service to POST its authnRequest to {{TODO-WHAT-URL}} and compliance tool will recognise you based on your entity ID.'
+      redirect_to '/success/rp'
     else
-      render text: 'Todo: there was an error talking to the compliance tool. Handle this properly.'
+      flash[:error] = compliance_tool_response.body
+      redirect_to '/error'
     end
   end
 end

@@ -1,0 +1,15 @@
+<% content_for(:page_title, 'Success') %>
+<h1 class=heading-medium>Your test is ready</h1>
+<p>The compliance tool has been configured to expect a request from your service now.</p>
+
+<p>
+  Check that your MSA is configured to point at the compliance tool's metadata. The config should look like this:
+</p>
+<pre class="language-json">
+<code>
+todo: what.should.the.config.look.like.com
+</code>
+</pre>
+<p>
+  You should then be able to start from your service, which should send you to the compliance tool.
+</p>

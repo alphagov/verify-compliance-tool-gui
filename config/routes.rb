@@ -19,4 +19,8 @@ Rails.application.routes.draw do
 
   get '/confirm/rp' => 'confirm#confirm_rp'
   post '/confirm/rp' => 'confirm#confirm_rp_post'
+
+  get '/success/rp' => 'success#relying_party'
+
+  get '/error' => 'error#error'
 end

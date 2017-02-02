@@ -1,0 +1,14 @@
+<% content_for(:page_title, 'Error') %>
+<h1 class=heading-medium>Compliance Tool - Error</h1>
+
+<p>There was an error talking to the compliance tool.</p>
+
+<% unless flash[:error].nil? %>
+  <p>The error was:</p>
+
+  <pre class="language-json">
+<code>
+<%= h flash[:error] %>
+</code>
+  </pre>
+<% end %>
