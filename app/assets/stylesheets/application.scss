@@ -1,3 +1,6 @@
+$toolkit-font-stack: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+$toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
 @import "govuk-elements";
 
 @import "design-patterns/alpha-beta";
@@ -5,4 +8,8 @@
 
 .language-json {
   overflow: auto;
+}
+
+#logo {
+  visibility: hidden;
 }
