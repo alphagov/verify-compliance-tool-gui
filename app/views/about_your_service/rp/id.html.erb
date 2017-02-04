@@ -6,6 +6,9 @@
     <%= f.label :entity_id, 'Entity ID', class: 'form-label' %>
     <span class="form-hint">This identifies your service to the rest of the federation</span>
     <%= f.text_field :entity_id, class: 'form-control' %>
+    <% unless @id_form.errors[:entity_id].empty? %>
+      <div class="form-error">Entity ID should be a URL (e.g. https://my-service.gov.uk/some-identifier)</div>
+    <% end %>
     <details>
       <summary>More about Entity ID</summary>
       <div class="panel panel-border-narrow">
@@ -21,6 +24,9 @@
     <%= f.label :service_url, 'Service URL', class: 'form-label' %>
     <span class="form-hint">This will consume responses from the GOV.UK Verify hub</span>
     <%= f.text_field :service_url, class: 'form-control' %>
+    <% unless @id_form.errors[:service_url].empty? %>
+      <div class="form-error">Service URL should be a URL (e.g. https://my-service.gov.uk/SAML2/Response)</div>
+    <% end %>
     <details>
       <summary>More about Service URL</summary>
       <div class="panel panel-border-narrow">

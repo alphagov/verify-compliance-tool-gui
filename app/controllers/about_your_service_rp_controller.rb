@@ -12,10 +12,14 @@ class AboutYourServiceRpController < ApplicationController
   def about_your_service_rp_id_post
     @id_form = RpIdForm.new(params.fetch('rp_id_form', {}))
 
-    cookies['rp_entity_id'] = @id_form.entity_id
-    cookies['rp_service_url'] = @id_form.service_url
+    if @id_form.valid?
+      cookies['rp_entity_id'] = @id_form.entity_id
+      cookies['rp_service_url'] = @id_form.service_url
 
-    redirect_to '/about-your-service/rp/matching'
+      redirect_to '/about-your-service/rp/matching'
+    else
+      render 'about_your_service/rp/id', :layout => 'application'
+    end
   end
 
   def about_your_service_rp_matching
