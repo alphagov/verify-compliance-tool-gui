@@ -16,7 +16,7 @@ class ConfirmController < ApplicationController
       encryptionPublicCert: cookies.fetch('rp_encryption_cert'),
       expectedPID: cookies.fetch('rp_expected_pid'),
       matchingServiceEntityId: cookies.fetch('rp_matching_service_entity_id'),
-      matchingServiceSigningPrivateCert: cookies.fetch('rp_matching_service_private_key'),
+      matchingServiceSigningPrivateCert: cookies.fetch('rp_matching_service_keystore'),
     }
 
     compliance_tool_request = Net::HTTP::Post.new(compliance_tool_url.path, 'Content-Type' => 'application/json')

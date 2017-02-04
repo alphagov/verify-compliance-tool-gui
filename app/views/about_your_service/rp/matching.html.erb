@@ -13,21 +13,20 @@
     </p>
   </div>
 </details>
-<form id="new-compliance-test-form" action="<%= about_your_service_rp_matching_path %>" method="post">
+<%= form_for @matching_form do |f| %>
   <div class="form-group">
-    <label class="form-label" for="expected-pid">Expected persistent identifier</label>
+    <%= f.label :expected_pid, 'Expected persistent identifier', class: 'form-label' %>
     <span class="form-hint">The user ID returned by your matching service</span>
-    <input class="form-control" type="text" name="expected-pid" id="expected-pid">
+    <%= f.text_field :expected_pid, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label class="form-label" for="ms-entity-id">Matching Service Entity ID</label>
-    <input class="form-control" type="text" name="ms-entity-id" id="ms-entity-id">
+    <%= f.label :ms_entity_id, 'Matching Service Entity ID', class: 'form-label' %>
+    <%= f.text_field :ms_entity_id, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <label class="form-label" for="ms-private-key">Matching Service Private Key</label>
-    <span class="form-hint">Base64 encoded private signing key for the Matching Service Adapter</span>
-    <textarea class="form-control" type="text" name="ms-private-key" id="ms-private-key"></textarea>
+    <%= f.label :ms_keystore, 'Matching Service Signing Keystore', class: 'form-label' %>
+    <span class="form-hint">Base64 encoded .pk8 keystore containing the MSAs signing private key and certificate</span>
+    <%= f.text_area :ms_keystore, class: 'form-control' %>
   </div>
-  <input class="button" type="submit" value="Next">
-  <%= token_tag %>
-</form>
+  <%= f.submit 'Next', class: 'button' %>
+<% end %>

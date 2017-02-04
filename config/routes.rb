@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   post '/about-your-service' => 'about_your_service#about_your_service_post'
 
   get '/about-your-service/rp/id' => 'about_your_service_rp#about_your_service_rp_id', as: :about_your_service_rp_id
-  post '/about-your-service/rp/id' => 'about_your_service_rp#about_your_service_rp_id_post', as: :about_your_service_rp_id_post
+  post '/about-your-service/rp/id' => 'about_your_service_rp#about_your_service_rp_id_post', as: :rp_id_forms
   get '/about-your-service/rp/matching' => 'about_your_service_rp#about_your_service_rp_matching', as: :about_your_service_rp_matching
-  post '/about-your-service/rp/matching' => 'about_your_service_rp#about_your_service_rp_matching_post', as: :about_your_service_rp_matching_post
+  post '/about-your-service/rp/matching' => 'about_your_service_rp#about_your_service_rp_matching_post', as: :rp_matching_forms
   get '/about-your-service/rp/certificates' => 'about_your_service_rp#about_your_service_rp_certificates', as: :about_your_service_rp_certificates
-  post '/about-your-service/rp/certificates' => 'about_your_service_rp#about_your_service_rp_certificates_post', as: :about_your_service_rp_certificates_post
+  post '/about-your-service/rp/certificates' => 'about_your_service_rp#about_your_service_rp_certificates_post', as: :rp_certificates_forms
 
   get '/about-your-service/idp/0' => 'about_your_service_idp#about_your_service_idp_0'
   post '/about-your-service/idp/0' => 'about_your_service_idp#about_your_service_idp_0_post'

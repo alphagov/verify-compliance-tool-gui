@@ -1,11 +1,11 @@
 <% content_for(:page_title, 'Relying Party ID') %>
 <h1 class="heading-medium">About your Relying Party</h1>
 
-<form id="new-compliance-test-form" action="<%= about_your_service_rp_id_path %>" method="post">
+<%= form_for @id_form do |f| %>
   <div class="form-group">
-    <label class="form-label" for="entity-id">Entity ID</label>
+    <%= f.label :entity_id, 'Entity ID', class: 'form-label' %>
     <span class="form-hint">This identifies your service to the rest of the federation</span>
-    <input class="form-control" type="text" id="entity-id" name="entity-id">
+    <%= f.text_field :entity_id, class: 'form-control' %>
     <details>
       <summary>More about Entity ID</summary>
       <div class="panel panel-border-narrow">
@@ -16,10 +16,11 @@
       </div>
     </details>
   </div>
+
   <div class="form-group">
-    <label class="form-label" for="url">Service URL</label>
+    <%= f.label :service_url, 'Service URL', class: 'form-label' %>
     <span class="form-hint">This will consume responses from the GOV.UK Verify hub</span>
-    <input class="form-control" type="text" id="url" name="url">
+    <%= f.text_field :service_url, class: 'form-control' %>
     <details>
       <summary>More about Service URL</summary>
       <div class="panel panel-border-narrow">
@@ -28,6 +29,5 @@
       </div>
     </details>
   </div>
-  <input class="button" type="submit" value="Next">
-  <%= token_tag %>
-</form>
+  <%= f.submit 'Next', class: 'button' %>
+<% end %>
