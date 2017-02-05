@@ -44,7 +44,7 @@ MIIEczCCA1ugAwIBAgIBADANBgkqhkiG9w0BAQQFAD
   <div class="form-group">
     <%= f.label :signing_cert, 'Signing Certificate', class: 'form-label' %>
     <span class="form-hint">Base64 encoded X509 signing certificate for your service</span>
-    <%= f.text_area :signing_cert, class: 'form-control' %>
+    <%= f.text_area :signing_cert, class: 'form-control certificate' %>
     <% unless @certificates_form.errors[:signing_cert].empty? %>
       <div class="form-error">Signing Certificate should be PEM encoded.</div>
     <% end %>
@@ -52,7 +52,7 @@ MIIEczCCA1ugAwIBAgIBADANBgkqhkiG9w0BAQQFAD
   <div class="form-group">
     <%= f.label :encryption_cert, 'Encryption Certificate', class: 'form-label' %>
     <span class="form-hint">Base64 encoded X509 encryption certificate for your service</span>
-    <%= f.text_area :encryption_cert, class: 'form-control' %>
+    <%= f.text_area :encryption_cert, class: 'form-control certificate' %>
     <% unless @certificates_form.errors[:encryption_cert].empty? %>
       <div class="form-error">Encryption Certificate should be PEM encoded.</div>
     <% end %>

@@ -27,3 +27,13 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
     color: $error-colour;
     margin-bottom: 5px;
 }
+
+.form-control { 
+  &.certificate,&.keystore {
+    width: 100%;
+    font-family: monospace;
+  }
+  &.certificate {
+    min-height: 12em;
+  }
+}

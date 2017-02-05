@@ -32,7 +32,7 @@
   <div class="form-group">
     <%= f.label :ms_keystore, 'Matching Service Signing Keystore', class: 'form-label' %>
     <span class="form-hint">Base64 encoded .pk8 keystore containing the MSAs signing private key and certificate</span>
-    <%= f.text_area :ms_keystore, class: 'form-control' %>
+    <%= f.text_area :ms_keystore, class: 'form-control keystore' %>
     <% unless @matching_form.errors[:ms_keystore].empty? %>
       <div class="form-error">Matching Service Signing Keystore should be a base64 encoded .pk8 file</div>
     <% end %>
