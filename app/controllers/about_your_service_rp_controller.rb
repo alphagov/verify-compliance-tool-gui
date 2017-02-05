@@ -29,11 +29,14 @@ class AboutYourServiceRpController < ApplicationController
   def about_your_service_rp_matching_post
     @matching_form = RpMatchingForm.new(params.fetch('rp_matching_form', {}))
 
-    cookies['rp_expected_pid'] = @matching_form.expected_pid
-    cookies['rp_matching_service_entity_id'] = @matching_form.ms_entity_id
-    cookies['rp_matching_service_keystore'] = @matching_form.ms_keystore
-
-    redirect_to '/about-your-service/rp/certificates'
+    if @matching_form.valid?
+      cookies['rp_expected_pid'] = @matching_form.expected_pid
+      cookies['rp_matching_service_entity_id'] = @matching_form.ms_entity_id
+      cookies['rp_matching_service_keystore'] = RpMatchingForm::normalize_keystore(@matching_form.ms_keystore)
+      redirect_to '/about-your-service/rp/certificates'
+    else
+      render 'about_your_service/rp/matching', :layout => 'application'
+    end
   end
 
   def about_your_service_rp_certificates

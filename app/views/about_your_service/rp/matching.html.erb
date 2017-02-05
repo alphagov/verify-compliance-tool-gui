@@ -18,15 +18,24 @@
     <%= f.label :expected_pid, 'Expected persistent identifier', class: 'form-label' %>
     <span class="form-hint">The user ID returned by your matching service</span>
     <%= f.text_field :expected_pid, class: 'form-control' %>
+    <% unless @matching_form.errors[:expected_pid].empty? %>
+      <div class="form-error">Expected persistent identifier cannot be empty</div>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label :ms_entity_id, 'Matching Service Entity ID', class: 'form-label' %>
     <%= f.text_field :ms_entity_id, class: 'form-control' %>
+    <% unless @matching_form.errors[:ms_entity_id].empty? %>
+      <div class="form-error">Matching Service Entity ID should be a URL (e.g. https://my-service.gov.uk/some-identifier/ms)</div>
+    <% end %>
   </div>
   <div class="form-group">
     <%= f.label :ms_keystore, 'Matching Service Signing Keystore', class: 'form-label' %>
     <span class="form-hint">Base64 encoded .pk8 keystore containing the MSAs signing private key and certificate</span>
     <%= f.text_area :ms_keystore, class: 'form-control' %>
+    <% unless @matching_form.errors[:ms_keystore].empty? %>
+      <div class="form-error">Matching Service Signing Keystore should be a base64 encoded .pk8 file</div>
+    <% end %>
   </div>
   <%= f.submit 'Next', class: 'button' %>
 <% end %>
