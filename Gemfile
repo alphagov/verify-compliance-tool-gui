@@ -23,6 +23,8 @@ gem 'govuk_frontend_toolkit'
 gem 'govuk_elements_rails'
 
 group :development, :test do
+  gem 'rspec', '~> 3.5.0'
+  gem 'rspec-rails', '~> 3.5.0'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'dotenv-rails'

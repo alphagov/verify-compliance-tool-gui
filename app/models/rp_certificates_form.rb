@@ -19,7 +19,7 @@ class RpCertificatesForm
     normalized_input = normalize_certificate input
     formatted_input = format_certificate normalized_input
     if formatted_input.nil?
-      return nil
+      return false
     end
     begin
       OpenSSL::X509::Certificate.new formatted_input
@@ -51,7 +51,7 @@ class RpCertificatesForm
     end
 <<-EOF
 -----BEGIN CERTIFICATE-----
-#{input.gsub(/(.{1,62})/, "\\1\n").sub(/\n\Z/, '')}
+#{input.gsub(/(.{1,64})/, "\\1\n").sub(/\n+\Z/, '')}
 -----END CERTIFICATE-----
 EOF
   end
