@@ -37,3 +37,43 @@ $toolkit-font-stack-tabular: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
     min-height: 12em;
   }
 }
+
+.test-status {
+  .icon {
+    &:before {
+      content: ' ';
+      display: block;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+  .running { &:before { background: $orange; animation: pulse 0.5s infinite alternate; } }
+  .notrun { &:before { background: $orange } }
+  .passed {
+    font-weight: bold;
+    color: $green;
+    &:before { background: $green }
+  }
+  .failed {
+    font-weight: bold;
+    color: $red;
+    &:before { background: $red }
+  }
+}
+
+.test-error {
+  @extend .bold;
+  color: $red;
+}
+
+.td-narrow {
+  width: 60%;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}

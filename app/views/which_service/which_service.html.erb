@@ -1,0 +1,23 @@
+<% content_for(:page_title, 'About your service') %>
+<h1 class=heading-medium>About your service</h1>
+<p>What type of service would you like to test?</p>
+<form class="form-group" method="post">
+    <fieldset>
+      <legend class="visually-hidden">What type of service would you like to test?</legend>
+      <div class="multiple-choice">
+        <input type="radio" name="service-type" id="rp" value="rp">
+        <label for="rp">Relying Party</label>
+      </div>
+      <div class="multiple-choice">
+        <input type="radio" name="service-type" id="ms" value="ms">
+        <label for="ms">Matching Service</label>
+      </div>
+      <div class="multiple-choice">
+        <input type="radio" name="service-type" id="idp" value="idp">
+        <label for="idp">Identity Provider</label>
+      </div>
+    </fieldset>
+    <br>
+    <input class="button" type="submit" value="Next">
+    <%= token_tag %>
+</form>

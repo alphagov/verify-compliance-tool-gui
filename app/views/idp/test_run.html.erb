@@ -1,0 +1,29 @@
+<% content_for(:page_title, 'IDP Test Run') %>
+<% content_for :refresh_tag do %>
+  <meta http-equiv="refresh" content="3" />
+<% end %>
+
+<h1 class="heading-medium">IDP Test Run</h1>
+<p>Test ID: <%= @test_run['id'] %></p>
+<table>
+  <thead>
+    <tr><th>ID</th><th>Description</th><th>Result</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @test_run['testCases'].each do |test| %>
+      <tr>
+        <td><%= test['id'] %></td>
+        <td class="td-narrow font-xsmall">
+          <p><%= test['description'] %></p>
+          <% if test['status']['message'] %>
+          <p class="font-xsmall test-error"><%= test['status']['message'] %></p>
+          <% end %>
+        </td>
+        <td class="test-status">
+          <span class="icon <%= test['status']['status'].downcase.gsub(' ', '') %>"><%= test['status']['status'].capitalize %></span>
+        </td>
+        <td class="numeric"><%= link_to 'Run Test', test['executeUri'], target: '_blank', class: 'button' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,32 +1,32 @@
-class AboutYourServiceRpController < ApplicationController
+class RpController < ApplicationController
   def initialize
-    @id_form = RpIdForm.new({})
+    @init_form = RpIdForm.new({})
     @matching_form = RpMatchingForm.new({})
     @certificates_form = RpCertificatesForm.new({})
   end
 
-  def about_your_service_rp_id
-    render 'about_your_service/rp/id', :layout => 'application'
+  def rp_id
+    render 'rp/id', :layout => 'application'
   end
 
-  def about_your_service_rp_id_post
-    @id_form = RpIdForm.new(params.fetch('rp_id_form', {}))
+  def rp_id_post
+    @init_form = RpIdForm.new(params.fetch('rp_id_form', {}))
 
-    if @id_form.valid?
-      cookies['rp_entity_id'] = @id_form.entity_id
-      cookies['rp_service_url'] = @id_form.service_url
+    if @init_form.valid?
+      cookies['rp_entity_id'] = @init_form.entity_id
+      cookies['rp_service_url'] = @init_form.service_url
 
-      redirect_to '/about-your-service/rp/matching'
+      redirect_to rp_matching_path
     else
-      render 'about_your_service/rp/id', :layout => 'application'
+      render 'rp/id', :layout => 'application'
     end
   end
 
-  def about_your_service_rp_matching
-    render 'about_your_service/rp/matching', :layout => 'application'
+  def rp_matching
+    render 'rp/matching', :layout => 'application'
   end
 
-  def about_your_service_rp_matching_post
+  def rp_matching_post
     @matching_form = RpMatchingForm.new(params.fetch('rp_matching_form', {}))
 
     if @matching_form.valid?
@@ -35,15 +35,15 @@ class AboutYourServiceRpController < ApplicationController
       cookies['rp_matching_service_keystore'] = RpMatchingForm::normalize_keystore(@matching_form.ms_keystore)
       redirect_to '/about-your-service/rp/certificates'
     else
-      render 'about_your_service/rp/matching', :layout => 'application'
+      render 'rp/matching', :layout => 'application'
     end
   end
 
-  def about_your_service_rp_certificates
-    render 'about_your_service/rp/certificates', :layout => 'application'
+  def rp_certificates
+    render 'rp/certificates', :layout => 'application'
   end
 
-  def about_your_service_rp_certificates_post
+  def rp_certificates_post
     @certificates_form = RpCertificatesForm.new(params.fetch('rp_certificates_form', {}))
 
     if @certificates_form.valid?
@@ -51,7 +51,7 @@ class AboutYourServiceRpController < ApplicationController
       cookies['rp_encryption_cert'] = RpCertificatesForm::normalize_certificate(@certificates_form.encryption_cert)
       redirect_to '/confirm/rp'
     else
-      render 'about_your_service/rp/certificates', :layout => 'application'
+      render 'rp/certificates', :layout => 'application'
     end
 
   end
