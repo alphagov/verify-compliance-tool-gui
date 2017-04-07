@@ -26,20 +26,16 @@ class IdpController < ApplicationController
   private
 
   def init_test_run(form)
-    test_run_location = confirm_idp_post(form.params)
-    if test_run_location
-      session[:test_run_location] = test_run_location
+    rsp = ComplianceToolClient.post_request('idp-test-run', form.params)
+    if rsp.code == '201'
+      session[:test_run_location] = rsp.header['Location']
       redirect_to idp_tests_path
     else
-      flash[:error] = response.body
+      flash[:error] = rsp.body
       redirect_to error_path
     end
   end
 
-  def confirm_idp_post(params)
-    rsp = ComplianceToolClient.post_request('idp-test-run', params)
-    rsp.header['Location'] if rsp.code == '201'
-  end
 
   def fetch_test_run(location)
     rsp = ComplianceToolClient.get_request(location)

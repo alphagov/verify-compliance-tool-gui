@@ -1,12 +1,7 @@
 class RpController < ApplicationController
-  def initialize
-    @init_form = RpIdForm.new({})
-    @matching_form = RpMatchingForm.new({})
-    @certificates_form = RpCertificatesForm.new({})
-  end
-
   def rp_id
-    render 'rp/id', :layout => 'application'
+    @init_form = RpIdForm.new({})
+    render rp_id_path
   end
 
   def rp_id_post
@@ -18,12 +13,13 @@ class RpController < ApplicationController
 
       redirect_to rp_matching_path
     else
-      render 'rp/id', :layout => 'application'
+      render rp_id_path
     end
   end
 
   def rp_matching
-    render 'rp/matching', :layout => 'application'
+    @matching_form = RpMatchingForm.new({})
+    render rp_matching_path
   end
 
   def rp_matching_post
@@ -32,28 +28,56 @@ class RpController < ApplicationController
     if @matching_form.valid?
       cookies['rp_expected_pid'] = @matching_form.expected_pid
       cookies['rp_matching_service_entity_id'] = @matching_form.ms_entity_id
-      cookies['rp_matching_service_keystore'] = RpMatchingForm::normalize_keystore(@matching_form.ms_keystore)
-      redirect_to '/about-your-service/rp/certificates'
+      cookies['rp_matching_service_keystore'] = @matching_form.ms_keystore
+      redirect_to rp_certificates_path
     else
-      render 'rp/matching', :layout => 'application'
+      render rp_matching_path
     end
   end
 
   def rp_certificates
-    render 'rp/certificates', :layout => 'application'
+    @certificates_form = RpCertificatesForm.new({})
+    render rp_certificates_path
   end
 
   def rp_certificates_post
     @certificates_form = RpCertificatesForm.new(params.fetch('rp_certificates_form', {}))
 
     if @certificates_form.valid?
-      cookies['rp_signing_cert'] = RpCertificatesForm::normalize_certificate(@certificates_form.signing_cert)
-      cookies['rp_encryption_cert'] = RpCertificatesForm::normalize_certificate(@certificates_form.encryption_cert)
-      redirect_to '/confirm/rp'
+      cookies['rp_signing_cert'] = @certificates_form.signing_certificate
+      cookies['rp_encryption_cert'] = @certificates_form.encryption_certificate
+      redirect_to rp_confirm_path
     else
-      render 'rp/certificates', :layout => 'application'
+      render rp_certificates_path
     end
-
   end
 
+  def confirm
+    render rp_confirm_path
+  end
+
+  def confirm_post
+    params = {
+      'rpEntityId' => cookies.fetch('rp_entity_id'),
+      'assertionConsumerServiceUrl' => cookies.fetch('rp_service_url'),
+      'signingPublicCert' => cookies.fetch('rp_signing_cert'),
+      'encryptionPublicCert' => cookies.fetch('rp_encryption_cert'),
+      'expectedPID' => cookies.fetch('rp_expected_pid'),
+      'matchingServiceEntityId' => cookies.fetch('rp_matching_service_entity_id'),
+      'matchingServiceSigningPrivateCert' => cookies.fetch('rp_matching_service_keystore'),
+    }
+
+    rsp = ComplianceToolClient.post_request('rp-test-data', params)
+
+    if rsp.code == '200'
+      redirect_to rp_success_path
+    else
+      flash[:error] = rsp.body
+      redirect_to error_path
+    end
+  end
+
+  def success
+    render rp_success_path
+  end
 end

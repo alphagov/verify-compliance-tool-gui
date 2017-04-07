@@ -22,6 +22,8 @@ class ComplianceToolClient
 
   def self.http(url)
     uri = URI(url)
-    Net::HTTP.new(uri.host, uri.port)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = uri.scheme == 'https'
+    http
   end
 end

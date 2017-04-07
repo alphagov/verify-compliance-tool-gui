@@ -33,28 +33,23 @@ MIIEczCCA1ugAwIBAgIBADANBgkqhkiG9w0BAQQFAD
 -----END CERTIFICATE-----
     </code>
     </pre>
-    <p>
-      Note that the message we send to the compliance tool does not include the 
-      BEGIN or END headers, and has the whitespace stripped out. You can also provide
-      certificates in this format if you prefer.
-    </p>
   </div>
 </details>
 <%= form_for @certificates_form do |f| %>
   <div class="form-group">
-    <%= f.label :signing_cert, 'Signing Certificate', class: 'form-label' %>
+    <%= f.label :signing_cert_file, 'Signing Certificate', class: 'form-label' %>
     <span class="form-hint">Base64 encoded X509 signing certificate for your service</span>
-    <%= f.text_area :signing_cert, class: 'form-control certificate' %>
-    <% unless @certificates_form.errors[:signing_cert].empty? %>
-      <div class="form-error">Signing Certificate should be PEM encoded.</div>
+    <%= f.file_field :signing_cert_file %>
+    <% unless @certificates_form.errors[:signing_cert_file].empty? %>
+      <div class="form-error">File <%= @certificates_form.errors[:signing_cert_file].first %></div>
     <% end %>
   </div>
   <div class="form-group">
-    <%= f.label :encryption_cert, 'Encryption Certificate', class: 'form-label' %>
+    <%= f.label :encryption_cert_file, 'Encryption Certificate', class: 'form-label' %>
     <span class="form-hint">Base64 encoded X509 encryption certificate for your service</span>
-    <%= f.text_area :encryption_cert, class: 'form-control certificate' %>
-    <% unless @certificates_form.errors[:encryption_cert].empty? %>
-      <div class="form-error">Encryption Certificate should be PEM encoded.</div>
+    <%= f.file_field :encryption_cert_file %>
+    <% unless @certificates_form.errors[:encryption_cert_file].empty? %>
+      <div class="form-error">File <%= @certificates_form.errors[:signing_cert_file].first %></div>
     <% end %>
   </div>
   <%= f.submit 'Next', class: 'button' %>
