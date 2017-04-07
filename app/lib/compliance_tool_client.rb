@@ -8,7 +8,7 @@ class ComplianceToolClient
   def self.get_request(location)
     url = URI(location)
     request = Net::HTTP::Get.new(url.path)
-    Rails.logger.info("ComplianceToolClient GET: #{url}")
+    Rails.logger.debug("ComplianceToolClient GET: #{url}")
     http(url).request(request)
   end
 
@@ -16,7 +16,7 @@ class ComplianceToolClient
     url = URI("#{URL}/#{path}")
     request = Net::HTTP::Post.new(url.path, 'Content-Type' => 'application/json')
     request.body = data.to_json
-    Rails.logger.info("ComplianceToolClient POST: #{url}")
+    Rails.logger.debug("ComplianceToolClient POST: #{url}\n#{data}")
     http(url).request(request)
   end
 
