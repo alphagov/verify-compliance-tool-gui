@@ -1,25 +1,17 @@
 class RpMatchingForm
   include ActiveModel::Model
 
-  attr_reader :ms_keystore, :expected_pid, :ms_entity_id
-  validates :ms_keystore, :expected_pid, :ms_entity_id, presence: true
-  validates :ms_entity_id, format: { with: /:\/\// }
-  validates :ms_keystore, format: { with: /\A[A-Za-z0-9\/+=]+\s*\Z/ }
+  attr_reader :ms_keystore_file, :expected_pid, :ms_entity_id
+  validates :ms_keystore_file, :expected_pid, :ms_entity_id, presence: true
+  validates :ms_keystore_file, keystore: true
 
   def initialize(hash) 
     @expected_pid = hash[:expected_pid]
     @ms_entity_id = hash[:ms_entity_id]
-    @ms_keystore = hash[:ms_keystore]
+    @ms_keystore_file = hash[:ms_keystore_file]
   end
 
-  def self.normalize_keystore(input)
-    # The compliance expects a base64 encoded keystore, but we allow trailing whitespace
-    # in the form for the user's convenience. This method strips the whitespace so the keystore
-    # is in the format expeted by compliance tool.
-    if input.nil?
-      nil
-    else
-      input.sub(/\s+\Z/, '')
-    end
+  def ms_keystore
+    Base64.strict_encode64(@ms_keystore_file.read)
   end
 end

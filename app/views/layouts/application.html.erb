@@ -2,6 +2,7 @@
 <% content_for :page_title, ' - Verify Compliance - GOV.UK' %>
 
 <% content_for :head do %>
+  <%= yield :refresh_tag %>
   <!--[if gt IE 8]><!--><%= stylesheet_link_tag 'application', integrity: true %><!--<![endif]-->
   <!--[if IE 8]><%= stylesheet_link_tag 'style-ie8' %><![endif]-->
   <%= csrf_meta_tags %>
