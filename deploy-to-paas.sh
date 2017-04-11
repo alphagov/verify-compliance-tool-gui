@@ -43,7 +43,7 @@ deploy() {
   cf push "$APP_NAME" -f manifest.yml -n "$APP_NAME"
   cf map-route "$APP_NAME" "$CF_DOMAIN" -n "$APP_NAME_BASE"
 
-  DEPLOYEDAPPS=$(cf apps | awk -v "app=$APP_NAME" '$1 ~ app {print $1}')
+  DEPLOYEDAPPS=$(cf apps | awk -v "app=$APP_NAME_BASE" '$1 ~ app {print $1}')
 
   for APP in $DEPLOYEDAPPS; do
     if [ "$APP" != "$APP_NAME" ]; then
