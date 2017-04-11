@@ -5,6 +5,7 @@ set -o pipefail
 
 cd "$(dirname "$0")"
 BASEDIR=$(pwd)
+BUILD_NUMBER=${BUILD_NUMBER:?"BUILD_NUMBER environment variable needs to be set"} >&2
 
 cfLogin() {
   if [ -z "${CF_USER:-}" ]; then
@@ -32,6 +33,31 @@ cfLogin() {
   fi
 }
 
+deploy() {
+  local APP_NAME_BASE="verify-compliance-tool-ui"
+  local APP_NAME="${APP_NAME_BASE}-${BUILD_NUMBER}"
+  local CF_DOMAIN="cloudapps.digital"
+
+  echo "Deploying:     $APP_NAME"
+
+  cf push "$APP_NAME" -f manifest.yml -n "$APP_NAME"
+  cf map-route "$APP_NAME" "$CF_DOMAIN" -n "$APP_NAME_BASE"
+
+  DEPLOYEDAPPS=$(cf apps | awk -v "app=$APP_NAME" '$1 ~ app {print $1}')
+
+  for APP in $DEPLOYEDAPPS; do
+    if [ "$APP" != "$APP_NAME" ]; then
+      echo "Removing old/orphaned deployment of ${APP_NAME_BASE}: $APP" >&2
+      # TODO: Check to see if a route exists before nuking it so that
+      #       we can detect unexpected failures of 'cf unmap-route'
+      cf unmap-route "$APP" "$CF_DOMAIN" -n "$ROUTE_NAME" || :
+      cf delete -r -f "$APP"
+    fi
+  done
+
+  echo "New route:     ${APP_NAME}.${CF_DOMAIN}"
+}
+
 cfLogin
-cf push -f manifest.yml
+deploy
 cf logout || :
