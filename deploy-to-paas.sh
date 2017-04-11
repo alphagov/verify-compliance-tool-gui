@@ -50,7 +50,7 @@ deploy() {
       echo "Removing old/orphaned deployment of ${APP_NAME_BASE}: $APP" >&2
       # TODO: Check to see if a route exists before nuking it so that
       #       we can detect unexpected failures of 'cf unmap-route'
-      cf unmap-route "$APP" "$CF_DOMAIN" -n "$ROUTE_NAME" || :
+      cf unmap-route "$APP" "$CF_DOMAIN" -n "$APP_NAME_BASE" || :
       cf delete -r -f "$APP"
     fi
   done
