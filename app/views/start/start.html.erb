@@ -1,11 +1,30 @@
 <% content_for(:page_title, 'Start') %>
-<h1 class=heading-medium>GOV.UK Verify - Compliance Tool</h1>
-<p>The Compliance Tool ensures that your service will work correctly with GOV.UK Verify.</p>
-<p>
-  You can use the compliance tool to test:
-  <ul class="list list-bullet">
-    <li>an "identity provider" (also known as a certified company)</li>
-  </ul>
-</p>
-
-<%= link_to('Start now', which_service_path, class: 'button button-start') %>
+<h1 class=heading-large>Test your Identity Provider with the Verify Compliance Tool</h1>
+<div class="grid-row">
+  <div class="column-full">
+    <p>
+      You can use the Compliance Tool to test that your service works with Verify.
+    </p>
+    <p>
+      You can only use this service to test an Identity Provider (also known as a Certified Company). 
+    </p>
+    <div class="panel panel-border-wide">
+        <p>
+          If you wish to test your Relying Party or Service Provider then you should follow the <a href="https://alphagov.github.io/rp-onboarding-tech-docs/pages/saml/samlComplianceTool.html">onboarding guide</a>.
+        </p>
+    </div>
+    <h2 class=heading-medium>When you use the Compliance Tool</h2>
+    <ul class="list list-bullet">
+      <li>It can send SAML messages to your localhost so you can test from any development environment.</li>
+      <li>It can accept self-signed certificates so you don't need to use certificates from the Verify PKI.</li>
+    </ul>
+    <h2 class=heading-medium>Before you begin</h2>
+    <ul class="list list-bullet">
+      <li>You will need to configure your service to read the <a href="https://compliance-tool-reference.ida.digital.cabinet-office.gov.uk/SAML2/metadata/federation">Compliance Tool's SAML metadata</a>.</li>
+      <li>Your service will need to be running.</li>
+    </ul>
+    <p>
+    <%= link_to('Start now', idp_init_path, class: 'button button-start') %>
+    </p>
+  </div>
+</div>
