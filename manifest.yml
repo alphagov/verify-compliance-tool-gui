@@ -3,3 +3,4 @@ applications:
 - name: verify-compliance-tool-ui
   memory: 256M
   buildpack: ruby_buildpack
+  stack: cflinuxfs3
