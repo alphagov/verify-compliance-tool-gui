@@ -3,7 +3,7 @@ require 'net/http'
 require 'json'
 
 class ComplianceToolClient
-  URL = ENV.fetch('COMPLIANCE_TOOL_URL', 'https://compliance-tool-reference.ida.digital.cabinet-office.gov.uk')
+  URL = ENV.fetch('COMPLIANCE_TOOL_URL', 'https://compliance-tool-integration.cloudapps.digital')
 
   def self.get_request(location)
     url = URI(location)
